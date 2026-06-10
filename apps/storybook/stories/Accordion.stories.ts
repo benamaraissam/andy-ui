@@ -23,3 +23,17 @@ export default meta;
 type Story = StoryObj;
 
 export const Overview: Story = {};
+
+export const States: Story = {
+  parameters: { docs: { description: { story: "Collapsed (default) and expanded." } } },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:480px">
+      <andy-accordion heading="Collapsed (default)">
+        <p class="t-body-sm">Hidden until the header is activated.</p>
+      </andy-accordion>
+      <andy-accordion heading="Expanded" open>
+        <p class="t-body-sm">Scanned 3 test files, grouped by suite, then diffed the failing assertions.</p>
+      </andy-accordion>
+    </div>
+  `,
+};
