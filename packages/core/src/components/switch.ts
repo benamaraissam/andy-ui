@@ -21,7 +21,14 @@ export class AndySwitch extends AndyElement {
     return html`
       <label class="ds-row ds-row--tight" style="cursor:${this.disabled ? "not-allowed" : "pointer"}">
         <span class="ds-switch">
-          <input type="checkbox" .checked=${this.checked} ?disabled=${this.disabled} @change=${this.onChange} />
+          <input
+            type="checkbox"
+            role="switch"
+            aria-checked=${this.checked ? "true" : "false"}
+            .checked=${this.checked}
+            ?disabled=${this.disabled}
+            @change=${this.onChange}
+          />
           <span class="track"></span>
         </span>
         ${this.hasSlot() ? html`<span class="t-label">${this.slotTarget()}</span>` : nothing}

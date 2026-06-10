@@ -19,7 +19,12 @@ export class AndyThemeToggle extends AndyElement {
 
   override render() {
     return html`
-      <button class="ds-theme-toggle" aria-label="Toggle theme" @click=${this.flip}>
+      <button
+        class="ds-theme-toggle"
+        aria-label="Toggle theme"
+        aria-pressed=${this.theme === "dark" ? "true" : "false"}
+        @click=${this.flip}
+      >
         <span class="sun">${icons.sun()}</span>
         <span class="moon">${icons.moon()}</span>
       </button>

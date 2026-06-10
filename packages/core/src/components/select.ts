@@ -7,6 +7,8 @@ export interface AndySelectOption {
   label: string;
 }
 
+let selectUid = 0;
+
 /**
  * `<andy-select>` — styled native select (`.ds-select`).
  *
@@ -15,6 +17,9 @@ export interface AndySelectOption {
  */
 @customElement("andy-select")
 export class AndySelect extends AndyElement {
+  /** Stable id linking the <label> to the <select> for a11y. */
+  private readonly _id = `andy-select-${++selectUid}`;
+
   @property() label = "";
   @property() value = "";
   @property({ attribute: false }) options: AndySelectOption[] = [];
@@ -26,12 +31,12 @@ export class AndySelect extends AndyElement {
 
   override render() {
     const select = html`
-      <select class="ds-select" .value=${this.value} @change=${this.onChange}>
+      <select id=${this._id} class="ds-select" .value=${this.value} @change=${this.onChange}>
         ${this.options.map((o) => html`<option value=${o.value}>${o.label}</option>`)}
       </select>
     `;
     return this.label
-      ? html`<div class="dp-field"><label class="label">${this.label}</label>${select}</div>`
+      ? html`<div class="dp-field"><label class="label" for=${this._id}>${this.label}</label>${select}</div>`
       : select;
   }
 
