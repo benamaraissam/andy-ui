@@ -72,8 +72,10 @@
   background: transparent; border: none; border-radius: 8px;
   font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500;
   color: var(--text-secondary); cursor: pointer;
-  transition: background var(--duration-fast), color var(--duration-fast);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast), color var(--duration-fast);
 }
+.ds-segment-btn:active { transform: scale(0.97); }
 .ds-segment-btn svg { width: 16px; height: 16px; }
 .ds-segment-btn:hover:not(.active) { color: var(--text-primary); background: var(--surface-hover); }
 .ds-segment-btn.active { background: var(--surface-card); color: var(--brand-primary); box-shadow: var(--shadow-xs); }

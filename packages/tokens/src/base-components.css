@@ -22,7 +22,10 @@
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out),
+              background var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out);
   white-space: nowrap;
   user-select: none;
   text-decoration: none;
@@ -45,8 +48,11 @@
 .btn:disabled,
 .dp-btn:disabled,
 .dp-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-.btn:not(:disabled):hover,
-.dp-btn:not(:disabled):hover { transform: translateY(-1px); }
+/* Lift on hover only on real pointers (touch fires hover on tap → sticky lift). */
+@media (hover: hover) and (pointer: fine) {
+  .btn:not(:disabled):hover,
+  .dp-btn:not(:disabled):hover { transform: translateY(-1px); }
+}
 .btn:not(:disabled):active,
 .dp-btn:not(:disabled):active { transform: translateY(0) scale(0.98); }
 
@@ -122,7 +128,9 @@
 .dp-card.hoverable:hover {
   border-color: var(--border-default);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
-  transform: translateY(-2px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .dp-card.hoverable:hover { transform: translateY(-2px); }
 }
 
 
@@ -249,11 +257,13 @@
   background: transparent; border: 0; color: var(--text-tertiary);
   cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center;
   border-radius: var(--radius-sm); position: relative;
-  transition: background var(--duration-fast), color var(--duration-fast);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast), color var(--duration-fast);
 }
 /* Expand the clickable area to >=44px (WCAG 2.5.5) without growing the visual. */
 .modal-close::before { content: ""; position: absolute; inset: -10px; }
 .modal-close:hover { background: var(--surface-hover); color: var(--text-primary); }
+.modal-close:active { transform: scale(0.92); }
 .modal-body { padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
 .modal-description { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55; margin: 0; }
 .modal-footer { display: flex; justify-content: flex-end; gap: var(--space-2); padding: 0 var(--space-5) var(--space-5); }
@@ -491,9 +501,12 @@
   border: none; background: transparent;
   border-radius: var(--radius-lg);
   cursor: pointer; color: var(--text-secondary);
-  transition: all var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
 }
 .menu-toggle:hover { background: var(--surface-hover); color: var(--text-primary); }
+.menu-toggle:active { transform: scale(0.94); }
 .menu-icon { width: 20px; height: 20px; }
 .header-title { flex: 1; min-width: 0; display: flex; align-items: center; }
 .header-actions { display: flex; align-items: center; gap: var(--space-3); }
@@ -529,12 +542,19 @@
   border: 1px solid var(--border-light); background: var(--surface-card);
   border-radius: var(--radius-lg);
   cursor: pointer; color: var(--text-secondary);
-  transition: all var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
 }
 .theme-toggle:hover {
   background: var(--surface-hover); border-color: var(--border-default);
-  color: var(--text-primary); transform: scale(1.05);
+  color: var(--text-primary);
 }
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover { transform: scale(1.05); }
+}
+.theme-toggle:active { transform: scale(0.96); }
 .theme-icon { width: 18px; height: 18px; }
 
 
@@ -651,8 +671,12 @@
   font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600;
   text-decoration: none;
   cursor: pointer; border: 1px solid transparent;
-  transition: all var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out),
+              background var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out);
 }
+.action-btn:active { transform: scale(0.97); }
 .action-btn svg { width: 14px; height: 14px; }
 .action-btn.primary {
   background: var(--ds-modal-btn-primary-bg);
@@ -713,8 +737,10 @@
   background: transparent; border: none; border-radius: 8px;
   font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500;
   color: var(--text-secondary); cursor: pointer;
-  transition: background var(--duration-fast), color var(--duration-fast);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast), color var(--duration-fast);
 }
+.provider-tab:active:not(:disabled) { transform: scale(0.97); }
 .provider-tab svg { width: 14px; height: 14px; }
 .provider-tab:hover:not(.active):not(:disabled) { background: var(--surface-hover); color: var(--text-primary); }
 .provider-tab.active {
@@ -799,3 +825,32 @@
 .prov-meta .status { font-size: var(--fs-xs); color: var(--text-tertiary); }
 .prov-meta .status--ok { color: var(--success-600); }
 [data-theme="dark"] .prov-meta .status--ok { color: #34d399; }
+
+
+/* ────────────────────────────────────────────────────────────────────────────
+   REDUCED MOTION
+   Gentler, not zero: keep opacity/colour transitions and the loading spinner,
+   but drop positional movement and collapse entrance choreography to a fade.
+   ──────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .btn:not(:disabled):hover,
+  .dp-btn:not(:disabled):hover,
+  .btn:not(:disabled):active,
+  .dp-btn:not(:disabled):active,
+  .dp-card.hoverable:hover,
+  .repo-card:hover,
+  .theme-toggle:hover,
+  .theme-toggle:active,
+  .action-btn:active,
+  .menu-toggle:active,
+  .modal-close:active,
+  .nav-item:hover {
+    transform: none !important;
+  }
+  .modal-overlay,
+  .dp-modal-backdrop,
+  .modal-content,
+  .dp-modal {
+    animation: dp-fade var(--duration-fast) var(--ease-out);
+  }
+}
