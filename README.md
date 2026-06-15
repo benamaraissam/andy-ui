@@ -1,7 +1,7 @@
 # Andy-UI
 
-[![Release](https://github.com/benamaraissam/andy-ui/actions/workflows/release.yml/badge.svg)](https://github.com/benamaraissam/andy-ui/actions/workflows/release.yml)
-[![Deploy Pages](https://github.com/benamaraissam/andy-ui/actions/workflows/pages.yml/badge.svg)](https://github.com/benamaraissam/andy-ui/actions/workflows/pages.yml)
+[![Release](https://github.com/rivoli-ai/andy-ui/actions/workflows/release.yml/badge.svg)](https://github.com/rivoli-ai/andy-ui/actions/workflows/release.yml)
+[![Deploy Pages](https://github.com/rivoli-ai/andy-ui/actions/workflows/pages.yml/badge.svg)](https://github.com/rivoli-ai/andy-ui/actions/workflows/pages.yml)
 
 A framework-agnostic design system. Components are authored once as
 [Lit](https://lit.dev) web components and styled by a single global stylesheet,
@@ -9,9 +9,9 @@ then consumed from **React**, **Angular**, or plain HTML.
 
 ## Live
 
-- 📚 **Storybook** — https://benamaraissam.github.io/andy-ui/
-- ⚛️ **React example** — https://benamaraissam.github.io/andy-ui/react/
-- 🅰️ **Angular example** — https://benamaraissam.github.io/andy-ui/angular/
+- 📚 **Storybook** — https://rivoli-ai.github.io/andy-ui/
+- ⚛️ **React example** — https://rivoli-ai.github.io/andy-ui/react/
+- 🅰️ **Angular example** — https://rivoli-ai.github.io/andy-ui/angular/
 
 ## Packages
 
@@ -57,8 +57,8 @@ four screens) using **only** Andy-UI components:
 
 | App | Live demo | Run locally |
 |---|---|---|
-| [`examples/react-app`](examples/react-app) | [Open ↗](https://benamaraissam.github.io/andy-ui/react/) | `pnpm --filter @andy-ui/example-react dev` |
-| [`examples/angular-app`](examples/angular-app) | [Open ↗](https://benamaraissam.github.io/andy-ui/angular/) | `pnpm --filter @andy-ui/example-angular start` |
+| [`examples/react-app`](examples/react-app) | [Open ↗](https://rivoli-ai.github.io/andy-ui/react/) | `pnpm --filter @andy-ui/example-react dev` |
+| [`examples/angular-app`](examples/angular-app) | [Open ↗](https://rivoli-ai.github.io/andy-ui/angular/) | `pnpm --filter @andy-ui/example-angular start` |
 
 ## Development
 
