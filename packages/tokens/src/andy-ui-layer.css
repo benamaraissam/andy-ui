@@ -53,6 +53,13 @@
 .au-icon--md { width: 20px; height: 20px; }
 .au-icon--lg { width: 24px; height: 24px; }
 .au-icon--xl { width: 32px; height: 32px; }
+/* Semantic colour tones — design tokens only (svg follows currentColor). */
+.au-icon--tone-brand   { color: var(--brand-primary); }
+.au-icon--tone-success { color: var(--success-500); }
+.au-icon--tone-warning { color: var(--warning-500); }
+.au-icon--tone-error   { color: var(--error-500); }
+.au-icon--tone-info    { color: var(--info-500); }
+.au-icon--tone-muted   { color: var(--text-muted); }
 
 /* ────────────────────────────────────────────────────────────────────────────
    AVATAR  (gradient square w/ initials — sidebar user, chat agent, message)
