@@ -41,9 +41,10 @@ export class AndyButton extends AndyElement {
         class="btn btn-${this.size} btn-${this.variant}"
         type=${this.type}
         ?disabled=${this.disabled || this.loading}
+        aria-busy=${this.loading ? "true" : nothing}
         @click=${this.onClick}
       >
-        ${this.loading ? html`<span class="btn-spinner"></span>` : nothing}
+        ${this.loading ? html`<span class="btn-spinner" aria-hidden="true"></span>` : nothing}
         ${this.slotTarget()}
       </button>
     `;

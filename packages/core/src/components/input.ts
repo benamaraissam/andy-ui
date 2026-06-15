@@ -2,6 +2,8 @@ import { html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { AndyElement, define } from "../internal/base.js";
 
+let inputUid = 0;
+
 /**
  * `<andy-input>` — labelled text field (`.dp-field` + `.dp-input`).
  *
@@ -10,6 +12,9 @@ import { AndyElement, define } from "../internal/base.js";
  */
 @customElement("andy-input")
 export class AndyInput extends AndyElement {
+  /** Stable id linking the <label>, <input>, and error message for a11y. */
+  private readonly _id = `andy-input-${++inputUid}`;
+
   @property() label = "";
   @property() value = "";
   @property() placeholder = "";
@@ -28,22 +33,28 @@ export class AndyInput extends AndyElement {
   }
 
   override render() {
+    const errorId = `${this._id}-error`;
     return html`
       <div class="dp-field">
         ${this.label
-          ? html`<label class="label">${this.label}${this.required ? html` <span class="req">*</span>` : nothing}</label>`
+          ? html`<label class="label" for=${this._id}
+              >${this.label}${this.required ? html` <span class="req" aria-hidden="true">*</span>` : nothing}</label
+            >`
           : nothing}
         <input
+          id=${this._id}
           class="dp-input ${this.error ? "is-error" : ""}"
           type=${this.type}
           .value=${this.value}
           placeholder=${this.placeholder}
           ?required=${this.required}
           ?disabled=${this.disabled}
+          aria-invalid=${this.error ? "true" : nothing}
+          aria-describedby=${this.error ? errorId : nothing}
           @input=${this.onInput}
           @change=${this.onChange}
         />
-        ${this.error ? html`<span class="error-msg">${this.error}</span>` : nothing}
+        ${this.error ? html`<span class="error-msg" id=${errorId} role="alert">${this.error}</span>` : nothing}
       </div>
     `;
   }

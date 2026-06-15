@@ -28,32 +28,59 @@ export class AndyTabs extends AndyElement {
     this.dispatchEvent(new CustomEvent("andy-change", { detail: id, bubbles: true, composed: true }));
   }
 
+  /** Roving keyboard navigation across the tablist (WAI-ARIA Tabs pattern). */
+  private onKeydown(e: KeyboardEvent) {
+    const ids = this.tabs.map((t) => t.id);
+    if (!ids.length) return;
+    const current = this.active || ids[0];
+    const idx = ids.indexOf(current);
+    if (idx < 0) return;
+    let next = idx;
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        next = (idx + 1) % ids.length;
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        next = (idx - 1 + ids.length) % ids.length;
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = ids.length - 1;
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+    this.select(ids[next]);
+    this.updateComplete.then(() => {
+      this.querySelector<HTMLElement>(`[data-tab-id="${ids[next]}"]`)?.focus();
+    });
+  }
+
   override render() {
     const active = this.active || this.tabs[0]?.id;
-    if (this.variant === "provider") {
-      return html`
-        <div class="provider-tabs">
-          ${this.tabs.map(
-            (t) => html`<button
-              class="provider-tab ${t.id === active ? "active" : ""}"
-              @click=${() => this.select(t.id)}
-            >
-              ${t.label}${t.count != null ? html` <span class="tab-count">${t.count}</span>` : nothing}
-            </button>`
-          )}
-        </div>
-      `;
-    }
+    const isProvider = this.variant === "provider";
+    const listClass = isProvider ? "provider-tabs" : "ds-segment";
+    const btnClass = isProvider ? "provider-tab" : "ds-segment-btn";
     return html`
-      <div class="ds-segment">
-        ${this.tabs.map(
-          (t) => html`<button
-            class="ds-segment-btn ${t.id === active ? "active" : ""}"
+      <div class=${listClass} role="tablist" @keydown=${this.onKeydown}>
+        ${this.tabs.map((t) => {
+          const selected = t.id === active;
+          return html`<button
+            class="${btnClass} ${selected ? "active" : ""}"
+            role="tab"
+            data-tab-id=${t.id}
+            aria-selected=${selected ? "true" : "false"}
+            tabindex=${selected ? 0 : -1}
             @click=${() => this.select(t.id)}
           >
-            ${t.label}
-          </button>`
-        )}
+            ${t.label}${isProvider && t.count != null ? html` <span class="tab-count">${t.count}</span>` : nothing}
+          </button>`;
+        })}
       </div>
     `;
   }
