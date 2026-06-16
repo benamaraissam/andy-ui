@@ -1,7 +1,7 @@
-import { html as i } from "lit";
-import { property as u, customElement as c } from "lit/decorators.js";
+import { html as c } from "lit";
+import { property as u, customElement as i } from "lit/decorators.js";
 import { d as h, A as v } from "../chunks/base-DPbIYdLL.js";
-import { i as d } from "../chunks/icons-Dyl0601F.js";
+import { a as d } from "../chunks/icons-7oGzUTdG.js";
 var m = Object.defineProperty, f = Object.getOwnPropertyDescriptor, l = (r, s, p, a) => {
   for (var e = a > 1 ? void 0 : a ? f(s, p) : s, n = r.length - 1, o; n >= 0; n--)
     (o = r[n]) && (e = (a ? o(s, p, e) : o(e)) || e);
@@ -15,7 +15,7 @@ let t = class extends v {
     this.value = r.target.value, this.dispatchEvent(new CustomEvent("andy-input", { detail: this.value, bubbles: !0, composed: !0 }));
   }
   render() {
-    return i`
+    return c`
       <div class="search-input-wrapper">
         <span class="search-icon">${d.search()}</span>
         <input
@@ -36,7 +36,7 @@ l([
   u()
 ], t.prototype, "placeholder", 2);
 t = l([
-  c("andy-search-input")
+  i("andy-search-input")
 ], t);
 h("andy-search-input", t);
 export {

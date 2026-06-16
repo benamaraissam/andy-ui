@@ -6,6 +6,8 @@ import { AndyElement } from "../internal/base.js";
  * @fires {CustomEvent<string>} andy-change - On commit (blur/Enter); detail is the value.
  */
 export declare class AndyInput extends AndyElement {
+    /** Stable id linking the <label>, <input>, and error message for a11y. */
+    private readonly _id;
     label: string;
     value: string;
     placeholder: string;

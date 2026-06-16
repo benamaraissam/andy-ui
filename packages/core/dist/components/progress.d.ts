@@ -5,6 +5,8 @@ import { AndyElement } from "../internal/base.js";
 export declare class AndyProgress extends AndyElement {
     /** 0–100. */
     value: number;
+    /** Accessible name for the progress bar. */
+    label: string;
     render(): import("lit").TemplateResult<1>;
 }
 declare global {

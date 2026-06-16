@@ -1,4 +1,8 @@
 import { AndyElement } from "../internal/base.js";
+import type { IconName } from "../internal/icons.js";
+import "./icon.js";
+import "./icon-chip.js";
+import "./avatar.js";
 /**
  * `<andy-app-shell>` — sidebar + main-column application layout.
  *
@@ -34,6 +38,32 @@ export declare class AndySidebar extends AndyElement {
     render(): import("lit").TemplateResult<1>;
 }
 /**
+ * `<andy-sidebar-brand>` — logo mark + wordmark for the sidebar `brand` slot.
+ *
+ * Composed from Andy-UI parts: an `<andy-icon-chip>` for the mark plus the
+ * name/tagline (hidden when the sidebar is collapsed).
+ * @slot logo - Optional custom logo, used instead of `icon`.
+ */
+export declare class AndySidebarBrand extends AndyElement {
+    name: string;
+    tagline: string;
+    /** Built-in icon name for the mark. Ignored when a `logo` is slotted. */
+    icon: IconName | "";
+    render(): import("lit").TemplateResult<1>;
+}
+/**
+ * `<andy-sidebar-user>` — user card for the sidebar `footer` slot.
+ *
+ * Composed from an `<andy-avatar>` plus name/email (hidden when collapsed).
+ */
+export declare class AndySidebarUser extends AndyElement {
+    name: string;
+    email: string;
+    /** Avatar initials (or slot an image into `<andy-avatar>` via the default slot). */
+    avatar: string;
+    render(): import("lit").TemplateResult<1>;
+}
+/**
  * `<andy-nav-section>` — titled group of nav items (`.nav-section`).
  * @slot - `<andy-nav-item>` rows (wrapped in a `.nav-list`).
  */
@@ -49,12 +79,26 @@ export declare class AndyNavSection extends AndyElement {
 export declare class AndyHeader extends AndyElement {
     render(): import("lit").TemplateResult<1>;
 }
+/**
+ * `<andy-footer>` — generic footer bar (`.au-footer`).
+ *
+ * A flexible slotted bar (content left, optional actions right). Works as a
+ * page/section footer and as the sidebar footer region.
+ * @slot         - Main footer content (left).
+ * @slot actions - Right-aligned actions.
+ */
+export declare class AndyFooter extends AndyElement {
+    render(): import("lit").TemplateResult<1>;
+}
 declare global {
     interface HTMLElementTagNameMap {
         "andy-app-shell": AndyAppShell;
         "andy-sidebar": AndySidebar;
+        "andy-sidebar-brand": AndySidebarBrand;
+        "andy-sidebar-user": AndySidebarUser;
         "andy-nav-section": AndyNavSection;
         "andy-header": AndyHeader;
+        "andy-footer": AndyFooter;
     }
 }
 //# sourceMappingURL=layout.d.ts.map

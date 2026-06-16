@@ -1,28 +1,31 @@
 import { html as m } from "lit";
 import { property as i, customElement as u } from "lit/decorators.js";
 import { d as v, A as d } from "../chunks/base-DPbIYdLL.js";
-var c = Object.defineProperty, f = Object.getOwnPropertyDescriptor, l = (e, s, o, t) => {
-  for (var r = t > 1 ? void 0 : t ? f(s, o) : s, p = e.length - 1, n; p >= 0; p--)
-    (n = e[p]) && (r = (t ? n(s, o, r) : n(r)) || r);
-  return t && r && c(s, o, r), r;
+var c = Object.defineProperty, f = Object.getOwnPropertyDescriptor, n = (e, a, o, t) => {
+  for (var r = t > 1 ? void 0 : t ? f(a, o) : a, l = e.length - 1, p; l >= 0; l--)
+    (p = e[l]) && (r = (t ? p(a, o, r) : p(r)) || r);
+  return t && r && c(a, o, r), r;
 };
-let a = class extends d {
+let s = class extends d {
   constructor() {
-    super(...arguments), this.value = 0;
+    super(...arguments), this.value = 0, this.label = "Progress";
   }
   render() {
     const e = Math.max(0, Math.min(100, this.value));
-    return m`<div class="ds-progress" role="progressbar" aria-valuenow=${e} aria-valuemin="0" aria-valuemax="100"><span style="width:${e}%"></span></div>`;
+    return m`<div class="ds-progress" role="progressbar" aria-label=${this.label} aria-valuenow=${e} aria-valuemin="0" aria-valuemax="100"><span style="width:${e}%"></span></div>`;
   }
 };
-l([
+n([
   i({ type: Number })
-], a.prototype, "value", 2);
-a = l([
+], s.prototype, "value", 2);
+n([
+  i()
+], s.prototype, "label", 2);
+s = n([
   u("andy-progress")
-], a);
-v("andy-progress", a);
+], s);
+v("andy-progress", s);
 export {
-  a as AndyProgress
+  s as AndyProgress
 };
 //# sourceMappingURL=progress.js.map

@@ -1,7 +1,7 @@
-import { html as d } from "lit";
+import { html as l } from "lit";
 import { state as h, customElement as f } from "lit/decorators.js";
-import { d as g, A as p } from "./base-DPbIYdLL.js";
-import { i as u } from "./icons-Dyl0601F.js";
+import { d as p, A as g } from "./base-DPbIYdLL.js";
+import { a as u } from "./icons-7oGzUTdG.js";
 const c = "andy-ui-theme";
 function i() {
   return typeof document > "u" ? "light" : document.documentElement.dataset.theme === "dark" ? "dark" : "light";
@@ -27,15 +27,15 @@ function P(e = "light") {
     (t === "light" || t === "dark") && (n = t);
   } catch {
   }
-  const r = n ?? e;
-  return document.documentElement.dataset.theme = r, r;
+  const s = n ?? e;
+  return document.documentElement.dataset.theme = s, s;
 }
-var E = Object.defineProperty, T = Object.getOwnPropertyDescriptor, l = (e, n, r, t) => {
-  for (var o = t > 1 ? void 0 : t ? T(n, r) : n, m = e.length - 1, a; m >= 0; m--)
-    (a = e[m]) && (o = (t ? a(n, r, o) : a(o)) || o);
-  return t && o && E(n, r, o), o;
+var E = Object.defineProperty, T = Object.getOwnPropertyDescriptor, d = (e, n, s, t) => {
+  for (var r = t > 1 ? void 0 : t ? T(n, s) : n, m = e.length - 1, a; m >= 0; m--)
+    (a = e[m]) && (r = (t ? a(n, s, r) : a(r)) || r);
+  return t && r && E(n, s, r), r;
 };
-let s = class extends p {
+let o = class extends g {
   constructor() {
     super(...arguments), this.theme = i();
   }
@@ -43,26 +43,31 @@ let s = class extends p {
     this.theme = v(), this.dispatchEvent(new CustomEvent("andy-theme-change", { detail: this.theme, bubbles: !0, composed: !0 }));
   }
   render() {
-    return d`
-      <button class="ds-theme-toggle" aria-label="Toggle theme" @click=${this.flip}>
+    return l`
+      <button
+        class="ds-theme-toggle"
+        aria-label="Toggle theme"
+        aria-pressed=${this.theme === "dark" ? "true" : "false"}
+        @click=${this.flip}
+      >
         <span class="sun">${u.sun()}</span>
         <span class="moon">${u.moon()}</span>
       </button>
     `;
   }
 };
-l([
+d([
   h()
-], s.prototype, "theme", 2);
-s = l([
+], o.prototype, "theme", 2);
+o = d([
   f("andy-theme-toggle")
-], s);
-g("andy-theme-toggle", s);
+], o);
+p("andy-theme-toggle", o);
 export {
-  s as A,
+  o as A,
   i as g,
   P as i,
   y as s,
   v as t
 };
-//# sourceMappingURL=theme-toggle-DhG6fsp4.js.map
+//# sourceMappingURL=theme-toggle-BKiyPTpF.js.map

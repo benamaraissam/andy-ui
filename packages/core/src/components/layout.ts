@@ -70,18 +70,16 @@ export class AndySidebar extends AndyElement {
   override render() {
     return html`
       <aside class="sidebar ${this.collapsed ? "collapsed" : ""}">
-        <div class="sidebar-header">
-          <div class="sidebar-header__top">
-            <div class="sidebar-brand">${this.slotTarget("brand")}</div>
-            ${this.collapsible
-              ? html`<button class="sidebar-collapse-toggle" title="Collapse" aria-label="Collapse sidebar" @click=${this.toggle}>
-                  <andy-icon name="chevronsLeft" size="sm"></andy-icon>
-                </button>`
-              : nothing}
-          </div>
-        </div>
+        <andy-header class="sidebar-header">
+          <div class="sidebar-brand">${this.slotTarget("brand")}</div>
+          ${this.collapsible
+            ? html`<button slot="actions" class="sidebar-collapse-toggle" title="Collapse" aria-label="Collapse sidebar" @click=${this.toggle}>
+                <andy-icon name="chevronsLeft" size="sm"></andy-icon>
+              </button>`
+            : nothing}
+        </andy-header>
         <nav class="sidebar-nav">${this.slotTarget()}</nav>
-        ${this.hasSlot("footer") ? html`<div class="sidebar-footer">${this.slotTarget("footer")}</div>` : nothing}
+        ${this.hasSlot("footer") ? html`<andy-footer class="sidebar-footer">${this.slotTarget("footer")}</andy-footer>` : nothing}
       </aside>
     `;
   }
@@ -179,6 +177,27 @@ export class AndyHeader extends AndyElement {
 }
 define("andy-header", AndyHeader);
 
+/**
+ * `<andy-footer>` — generic footer bar (`.au-footer`).
+ *
+ * A flexible slotted bar (content left, optional actions right). Works as a
+ * page/section footer and as the sidebar footer region.
+ * @slot         - Main footer content (left).
+ * @slot actions - Right-aligned actions.
+ */
+@customElement("andy-footer")
+export class AndyFooter extends AndyElement {
+  override render() {
+    return html`
+      <footer class="au-footer">
+        <div class="au-footer__main">${this.slotTarget()}</div>
+        ${this.hasSlot("actions") ? html`<div class="au-footer__actions">${this.slotTarget("actions")}</div>` : nothing}
+      </footer>
+    `;
+  }
+}
+define("andy-footer", AndyFooter);
+
 declare global {
   interface HTMLElementTagNameMap {
     "andy-app-shell": AndyAppShell;
@@ -187,5 +206,6 @@ declare global {
     "andy-sidebar-user": AndySidebarUser;
     "andy-nav-section": AndyNavSection;
     "andy-header": AndyHeader;
+    "andy-footer": AndyFooter;
   }
 }

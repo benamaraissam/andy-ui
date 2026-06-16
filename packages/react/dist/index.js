@@ -10,7 +10,7 @@
  */
 import * as React from "react";
 import { createComponent } from "@lit/react";
-import { AndyButton, AndyBadge, AndyStatus, AndyVersionPill, AndyInput, AndySelect, AndySearchInput, AndySwitch, AndyCard, AndySkillCard, AndyStat, AndyCallout, AndyAvatar, AndyProgress, AndyIconChip, AndyEmptyState, AndyBreadcrumb, AndyNavList, AndyNavItem, AndyAppShell, AndySidebar, AndyNavSection, AndyHeader, AndyModal, AndyTabs, AndyAccordion, AndyThemeToggle, AndyKeyBox, AndyTable, AndyChat, AndyMessage, AndyTyping, AndySession, } from "@andy-ui/core";
+import { AndyButton, AndyBadge, AndyStatus, AndyVersionPill, AndyInput, AndySelect, AndySearchInput, AndySwitch, AndyCard, AndySkillCard, AndyStat, AndyCallout, AndyAvatar, AndyProgress, AndyIcon, AndyIconChip, AndyEmptyState, AndyBreadcrumb, AndyNavList, AndyNavItem, AndyNavbar, AndyAppShell, AndySidebar, AndySidebarBrand, AndySidebarUser, AndyNavSection, AndyHeader, AndyFooter, AndyModal, AndyTabs, AndyAccordion, AndyThemeToggle, AndyKeyBox, AndyTable, AndyChat, AndyMessage, AndyTyping, AndySession, } from "@andy-ui/core";
 export const Button = createComponent({
     react: React,
     tagName: "andy-button",
@@ -53,6 +53,7 @@ export const Stat = createComponent({ react: React, tagName: "andy-stat", elemen
 export const Callout = createComponent({ react: React, tagName: "andy-callout", elementClass: AndyCallout });
 export const Avatar = createComponent({ react: React, tagName: "andy-avatar", elementClass: AndyAvatar });
 export const Progress = createComponent({ react: React, tagName: "andy-progress", elementClass: AndyProgress });
+export const Icon = createComponent({ react: React, tagName: "andy-icon", elementClass: AndyIcon });
 export const IconChip = createComponent({ react: React, tagName: "andy-icon-chip", elementClass: AndyIconChip });
 export const EmptyState = createComponent({ react: React, tagName: "andy-empty-state", elementClass: AndyEmptyState });
 export const Breadcrumb = createComponent({
@@ -75,8 +76,21 @@ export const Sidebar = createComponent({
     elementClass: AndySidebar,
     events: { onAndyCollapseToggle: "andy-collapse-toggle" },
 });
+export const SidebarBrand = createComponent({ react: React, tagName: "andy-sidebar-brand", elementClass: AndySidebarBrand });
+export const SidebarUser = createComponent({ react: React, tagName: "andy-sidebar-user", elementClass: AndySidebarUser });
 export const NavSection = createComponent({ react: React, tagName: "andy-nav-section", elementClass: AndyNavSection });
+export const Navbar = createComponent({
+    react: React,
+    tagName: "andy-navbar",
+    elementClass: AndyNavbar,
+    events: {
+        onAndyNavigate: "andy-navigate",
+        onAndyInput: "andy-input",
+        onAndyThemeChange: "andy-theme-change",
+    },
+});
 export const Header = createComponent({ react: React, tagName: "andy-header", elementClass: AndyHeader });
+export const Footer = createComponent({ react: React, tagName: "andy-footer", elementClass: AndyFooter });
 export const Modal = createComponent({
     react: React,
     tagName: "andy-modal",

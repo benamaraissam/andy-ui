@@ -16,6 +16,8 @@ export declare class AndyTabs extends AndyElement {
     active: string;
     variant: AndyTabsVariant;
     private select;
+    /** Roving keyboard navigation across the tablist (WAI-ARIA Tabs pattern). */
+    private onKeydown;
     render(): import("lit").TemplateResult<1>;
 }
 declare global {

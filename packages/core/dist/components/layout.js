@@ -1,15 +1,18 @@
-import { html as t, nothing as b } from "lit";
-import { property as n, customElement as c } from "lit/decorators.js";
-import { d as p, A as h } from "../chunks/base-DPbIYdLL.js";
-var f = Object.defineProperty, m = Object.getOwnPropertyDescriptor, e = (l, o, v, r) => {
-  for (var s = r > 1 ? void 0 : r ? m(o, v) : o, g = l.length - 1, u; g >= 0; g--)
-    (u = l[g]) && (s = (r ? u(o, v, s) : u(s)) || s);
-  return r && s && f(o, v, s), s;
+import { html as s, nothing as t } from "lit";
+import { property as a, customElement as n } from "lit/decorators.js";
+import { d as l, A as i } from "../chunks/base-DPbIYdLL.js";
+import "./icon.js";
+import "./icon-chip.js";
+import "./avatar.js";
+var _ = Object.defineProperty, T = Object.getOwnPropertyDescriptor, e = (p, h, g, v) => {
+  for (var r = v > 1 ? void 0 : v ? T(h, g) : h, u = p.length - 1, m; u >= 0; u--)
+    (m = p[u]) && (r = (v ? m(h, g, r) : m(r)) || r);
+  return v && r && _(h, g, r), r;
 };
-let d = class extends h {
+let y = class extends i {
   constructor() {
-    super(...arguments), this.collapsed = !1, this._onToggle = (l) => {
-      this.collapsed = l.detail;
+    super(...arguments), this.collapsed = !1, this._onToggle = (p) => {
+      this.collapsed = p.detail;
     };
   }
   connectedCallback() {
@@ -19,7 +22,7 @@ let d = class extends h {
     super.disconnectedCallback(), this.removeEventListener("andy-collapse-toggle", this._onToggle);
   }
   render() {
-    return t`
+    return s`
       ${this.slotTarget("sidebar")}
       <div class="app-col">
         ${this.slotTarget("header")}
@@ -29,13 +32,13 @@ let d = class extends h {
   }
 };
 e([
-  n({ type: Boolean, reflect: !0 })
-], d.prototype, "collapsed", 2);
-d = e([
-  c("andy-app-shell")
-], d);
-p("andy-app-shell", d);
-let a = class extends h {
+  a({ type: Boolean, reflect: !0 })
+], y.prototype, "collapsed", 2);
+y = e([
+  n("andy-app-shell")
+], y);
+l("andy-app-shell", y);
+let c = class extends i {
   constructor() {
     super(...arguments), this.collapsed = !1, this.collapsible = !0;
   }
@@ -45,55 +48,109 @@ let a = class extends h {
     );
   }
   render() {
-    return t`
+    return s`
       <aside class="sidebar ${this.collapsed ? "collapsed" : ""}">
-        <div class="sidebar-header">
-          <div class="sidebar-header__top">
-            <div class="sidebar-brand">${this.slotTarget("brand")}</div>
-            ${this.collapsible ? t`<button class="sidebar-collapse-toggle" title="Collapse" aria-label="Collapse sidebar" @click=${this.toggle}>
-                  <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19l-7-7 7-7M19 19l-7-7 7-7" /></svg>
-                </button>` : b}
-          </div>
-        </div>
+        <andy-header class="sidebar-header">
+          <div class="sidebar-brand">${this.slotTarget("brand")}</div>
+          ${this.collapsible ? s`<button slot="actions" class="sidebar-collapse-toggle" title="Collapse" aria-label="Collapse sidebar" @click=${this.toggle}>
+                <andy-icon name="chevronsLeft" size="sm"></andy-icon>
+              </button>` : t}
+        </andy-header>
         <nav class="sidebar-nav">${this.slotTarget()}</nav>
-        ${this.hasSlot("footer") ? t`<div class="sidebar-footer">${this.slotTarget("footer")}</div>` : b}
+        ${this.hasSlot("footer") ? s`<andy-footer class="sidebar-footer">${this.slotTarget("footer")}</andy-footer>` : t}
       </aside>
     `;
   }
 };
 e([
-  n({ type: Boolean, reflect: !0 })
-], a.prototype, "collapsed", 2);
+  a({ type: Boolean, reflect: !0 })
+], c.prototype, "collapsed", 2);
 e([
-  n({ type: Boolean })
-], a.prototype, "collapsible", 2);
-a = e([
-  c("andy-sidebar")
-], a);
-p("andy-sidebar", a);
-let i = class extends h {
+  a({ type: Boolean })
+], c.prototype, "collapsible", 2);
+c = e([
+  n("andy-sidebar")
+], c);
+l("andy-sidebar", c);
+let o = class extends i {
   constructor() {
-    super(...arguments), this.heading = "";
+    super(...arguments), this.name = "", this.tagline = "", this.icon = "box";
   }
   render() {
-    return t`
-      <div class="nav-section">
-        ${this.heading ? t`<p class="nav-section-title collapsed-hide">${this.heading}</p>` : b}
-        <ul class="nav-list">${this.slotTarget()}</ul>
+    return s`
+      <andy-icon-chip variant="solid" icon=${this.icon || t}>${this.slotTarget("logo")}</andy-icon-chip>
+      <span class="sidebar-brand__text collapsed-hide">
+        ${this.name ? s`<span class="sidebar-brand__name">${this.name}</span>` : t}
+        ${this.tagline ? s`<span class="sidebar-brand__tagline">${this.tagline}</span>` : t}
+      </span>
+    `;
+  }
+};
+e([
+  a()
+], o.prototype, "name", 2);
+e([
+  a()
+], o.prototype, "tagline", 2);
+e([
+  a({ reflect: !0 })
+], o.prototype, "icon", 2);
+o = e([
+  n("andy-sidebar-brand")
+], o);
+l("andy-sidebar-brand", o);
+let d = class extends i {
+  constructor() {
+    super(...arguments), this.name = "", this.email = "", this.avatar = "";
+  }
+  render() {
+    return s`
+      <div class="sidebar-user">
+        <andy-avatar>${this.avatar}</andy-avatar>
+        <span class="sidebar-user__meta collapsed-hide">
+          ${this.name ? s`<span class="sidebar-user__name">${this.name}</span>` : t}
+          ${this.email ? s`<span class="sidebar-user__email">${this.email}</span>` : t}
+        </span>
       </div>
     `;
   }
 };
 e([
-  n()
-], i.prototype, "heading", 2);
-i = e([
-  c("andy-nav-section")
-], i);
-p("andy-nav-section", i);
-let y = class extends h {
+  a()
+], d.prototype, "name", 2);
+e([
+  a()
+], d.prototype, "email", 2);
+e([
+  a()
+], d.prototype, "avatar", 2);
+d = e([
+  n("andy-sidebar-user")
+], d);
+l("andy-sidebar-user", d);
+let b = class extends i {
+  constructor() {
+    super(...arguments), this.heading = "";
+  }
   render() {
-    return t`
+    return s`
+      <div class="nav-section">
+        ${this.heading ? s`<p class="nav-section-title collapsed-hide">${this.heading}</p>` : t}
+        <div class="nav-list" role="list">${this.slotTarget()}</div>
+      </div>
+    `;
+  }
+};
+e([
+  a()
+], b.prototype, "heading", 2);
+b = e([
+  n("andy-nav-section")
+], b);
+l("andy-nav-section", b);
+let $ = class extends i {
+  render() {
+    return s`
       <header class="header">
         <div class="header-content">
           <div class="header-title">${this.slotTarget()}</div>
@@ -103,14 +160,31 @@ let y = class extends h {
     `;
   }
 };
-y = e([
-  c("andy-header")
-], y);
-p("andy-header", y);
+$ = e([
+  n("andy-header")
+], $);
+l("andy-header", $);
+let f = class extends i {
+  render() {
+    return s`
+      <footer class="au-footer">
+        <div class="au-footer__main">${this.slotTarget()}</div>
+        ${this.hasSlot("actions") ? s`<div class="au-footer__actions">${this.slotTarget("actions")}</div>` : t}
+      </footer>
+    `;
+  }
+};
+f = e([
+  n("andy-footer")
+], f);
+l("andy-footer", f);
 export {
-  d as AndyAppShell,
-  y as AndyHeader,
-  i as AndyNavSection,
-  a as AndySidebar
+  y as AndyAppShell,
+  f as AndyFooter,
+  $ as AndyHeader,
+  b as AndyNavSection,
+  c as AndySidebar,
+  o as AndySidebarBrand,
+  d as AndySidebarUser
 };
 //# sourceMappingURL=layout.js.map

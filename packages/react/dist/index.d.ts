@@ -1,5 +1,5 @@
 import { type EventName } from "@lit/react";
-import { AndyButton, AndyBadge, AndyStatus, AndyVersionPill, AndyInput, AndySelect, AndySearchInput, AndySwitch, AndyCard, AndySkillCard, AndyStat, AndyCallout, AndyAvatar, AndyProgress, AndyIconChip, AndyEmptyState, AndyBreadcrumb, AndyNavList, AndyNavItem, AndyAppShell, AndySidebar, AndyNavSection, AndyHeader, AndyModal, AndyTabs, AndyAccordion, AndyThemeToggle, AndyKeyBox, AndyTable, AndyChat, AndyMessage, AndyTyping, AndySession, type AndyCrumb, type AndyTab, type AndyColumn, type AndyRow, type AndySelectOption, type AndyTheme } from "@andy-ui/core";
+import { AndyButton, AndyBadge, AndyStatus, AndyVersionPill, AndyInput, AndySelect, AndySearchInput, AndySwitch, AndyCard, AndySkillCard, AndyStat, AndyCallout, AndyAvatar, AndyProgress, AndyIcon, AndyIconChip, AndyEmptyState, AndyBreadcrumb, AndyNavList, AndyNavItem, AndyNavbar, AndyAppShell, AndySidebar, AndySidebarBrand, AndySidebarUser, AndyNavSection, AndyHeader, AndyFooter, AndyModal, AndyTabs, AndyAccordion, AndyThemeToggle, AndyKeyBox, AndyTable, AndyChat, AndyMessage, AndyTyping, AndySession, type AndyCrumb, type AndyTab, type AndyColumn, type AndyRow, type AndySelectOption, type AndyTheme } from "@andy-ui/core";
 export declare const Button: import("@lit/react").ReactWebComponent<AndyButton, {
     onAndyClick: EventName<CustomEvent<void>>;
 }>;
@@ -25,6 +25,7 @@ export declare const Stat: import("@lit/react").ReactWebComponent<AndyStat, {}>;
 export declare const Callout: import("@lit/react").ReactWebComponent<AndyCallout, {}>;
 export declare const Avatar: import("@lit/react").ReactWebComponent<AndyAvatar, {}>;
 export declare const Progress: import("@lit/react").ReactWebComponent<AndyProgress, {}>;
+export declare const Icon: import("@lit/react").ReactWebComponent<AndyIcon, {}>;
 export declare const IconChip: import("@lit/react").ReactWebComponent<AndyIconChip, {}>;
 export declare const EmptyState: import("@lit/react").ReactWebComponent<AndyEmptyState, {}>;
 export declare const Breadcrumb: import("@lit/react").ReactWebComponent<AndyBreadcrumb, {
@@ -38,8 +39,16 @@ export declare const AppShell: import("@lit/react").ReactWebComponent<AndyAppShe
 export declare const Sidebar: import("@lit/react").ReactWebComponent<AndySidebar, {
     onAndyCollapseToggle: EventName<CustomEvent<boolean>>;
 }>;
+export declare const SidebarBrand: import("@lit/react").ReactWebComponent<AndySidebarBrand, {}>;
+export declare const SidebarUser: import("@lit/react").ReactWebComponent<AndySidebarUser, {}>;
 export declare const NavSection: import("@lit/react").ReactWebComponent<AndyNavSection, {}>;
+export declare const Navbar: import("@lit/react").ReactWebComponent<AndyNavbar, {
+    onAndyNavigate: EventName<CustomEvent<AndyCrumb>>;
+    onAndyInput: EventName<CustomEvent<string>>;
+    onAndyThemeChange: EventName<CustomEvent<AndyTheme>>;
+}>;
 export declare const Header: import("@lit/react").ReactWebComponent<AndyHeader, {}>;
+export declare const Footer: import("@lit/react").ReactWebComponent<AndyFooter, {}>;
 export declare const Modal: import("@lit/react").ReactWebComponent<AndyModal, {
     onAndyClose: EventName<CustomEvent<void>>;
 }>;

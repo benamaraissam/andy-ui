@@ -10,6 +10,8 @@ export interface AndySelectOption {
  * @fires {CustomEvent<string>} andy-change - detail is the selected value.
  */
 export declare class AndySelect extends AndyElement {
+    /** Stable id linking the <label> to the <select> for a11y. */
+    private readonly _id;
     label: string;
     value: string;
     options: AndySelectOption[];

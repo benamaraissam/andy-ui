@@ -32,10 +32,11 @@ const meta: Meta = {
           <andy-sidebar-user slot="footer" name="Andy" email="andy@andy-ui.dev" avatar="AY"></andy-sidebar-user>
         </andy-sidebar>
 
-        <andy-header slot="header">
-          <andy-breadcrumb .items=${[{ label: "workspace", href: "#" }, { label: "agents" }]}></andy-breadcrumb>
-          <andy-theme-toggle slot="actions"></andy-theme-toggle>
-        </andy-header>
+        <andy-navbar
+          slot="header"
+          .items=${[{ label: "workspace", href: "#" }, { label: "agents" }]}
+          searchPlaceholder="Search…"
+        ></andy-navbar>
 
         <div class="au-page-heading" style="margin-bottom:20px">
           <andy-icon-chip icon="grid"></andy-icon-chip>

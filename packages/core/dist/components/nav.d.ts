@@ -17,6 +17,7 @@ export declare class AndyNavItem extends AndyElement {
     href: string;
     /** Stable identifier echoed back in the `andy-select` event detail. */
     key: string;
+    connectedCallback(): void;
     private onClick;
     render(): import("lit").TemplateResult<1>;
 }

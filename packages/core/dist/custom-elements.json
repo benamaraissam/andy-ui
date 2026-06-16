@@ -116,6 +116,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "src/components/icon.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "src/components/icon-chip.js"
           }
         },
@@ -141,6 +149,14 @@
           "declaration": {
             "name": "*",
             "module": "src/components/nav.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/components/navbar.js"
           }
         },
         {
@@ -254,6 +270,30 @@
             "name": "AndyTheme",
             "module": "./internal/theme.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "icons",
+          "declaration": {
+            "name": "icons",
+            "module": "./internal/icons.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "iconNames",
+          "declaration": {
+            "name": "iconNames",
+            "module": "./internal/icons.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "IconName",
+          "declaration": {
+            "name": "IconName",
+            "module": "./internal/icons.js"
+          }
         }
       ]
     },
@@ -263,7 +303,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-accordion>` — collapsible disclosure (mirrors the `.ds-think` / collapse pattern).",
+          "description": "`<andy-accordion>` — collapsible disclosure (`.ds-accordion`).\r\n\r\nThe panel animates its height open/closed and the chevron rotates. Collapsed\r\ncontent is `inert` so it stays out of the tab order and the a11y tree.",
           "name": "AndyAccordion",
           "slots": [
             {
@@ -496,7 +536,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-breadcrumb>` — path breadcrumb (`.dp-breadcrumb`).\n\nProvide `items`; the last item renders as the current leaf.",
+          "description": "`<andy-breadcrumb>` — path breadcrumb (`.dp-breadcrumb`).\r\n\r\nProvide `items`; the last item renders as the current leaf.",
           "name": "AndyBreadcrumb",
           "members": [
             {
@@ -1198,11 +1238,11 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-icon-chip>` — gradient-tinted square holding an icon (`.au-icon-chip`).",
+          "description": "`<andy-icon-chip>` — gradient-tinted square holding an icon (`.au-icon-chip`).\r\n\r\nSet `icon` to a built-in icon name, or slot in your own SVG.",
           "name": "AndyIconChip",
           "slots": [
             {
-              "description": "The icon SVG.",
+              "description": "The icon SVG (used when `icon` is not set).",
               "name": ""
             }
           ],
@@ -1226,6 +1266,17 @@
               "default": "\"md\"",
               "attribute": "size",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "IconName | \"\""
+              },
+              "default": "\"\"",
+              "description": "Built-in icon name. When set, it's rendered instead of slotted content.",
+              "attribute": "icon",
+              "reflects": true
             }
           ],
           "attributes": [
@@ -1244,6 +1295,15 @@
               },
               "default": "\"md\"",
               "fieldName": "size"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "IconName | \"\""
+              },
+              "default": "\"\"",
+              "description": "Built-in icon name. When set, it's rendered instead of slotted content.",
+              "fieldName": "icon"
             }
           ],
           "superclass": {
@@ -1269,6 +1329,122 @@
           "declaration": {
             "name": "AndyIconChip",
             "module": "src/components/icon-chip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<andy-icon>` — renders a built-in icon from the Andy-UI set (`.au-icon`).\r\n\r\nDecorative by default (`aria-hidden`). Provide `label` to expose it as an\r\nimage to assistive tech. The same icon names power `<andy-icon-chip icon>`.",
+          "name": "AndyIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "IconName"
+              },
+              "default": "\"info\"",
+              "description": "Icon name from the built-in set.",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "AndyIconSize"
+              },
+              "default": "\"md\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "AndyIconTone"
+              },
+              "default": "\"inherit\"",
+              "description": "Semantic colour (design tokens). Defaults to `inherit` (currentColor).",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Accessible label. When empty the icon is decorative (hidden from AT).",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "IconName"
+              },
+              "default": "\"info\"",
+              "description": "Icon name from the built-in set.",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "AndyIconSize"
+              },
+              "default": "\"md\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "AndyIconTone"
+              },
+              "default": "\"inherit\"",
+              "description": "Semantic colour (design tokens). Defaults to `inherit` (currentColor).",
+              "fieldName": "tone"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Accessible label. When empty the icon is decorative (hidden from AT).",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "AndyElement",
+            "module": "/src/internal/base.js"
+          },
+          "tagName": "andy-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AndyIcon",
+          "declaration": {
+            "name": "AndyIcon",
+            "module": "src/components/icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "andy-icon",
+          "declaration": {
+            "name": "AndyIcon",
+            "module": "src/components/icon.ts"
           }
         }
       ]
@@ -1543,7 +1719,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-app-shell>` — sidebar + main-column application layout.\n\nRegions (light-DOM slots):",
+          "description": "`<andy-app-shell>` — sidebar + main-column application layout.\r\n\r\nRegions (light-DOM slots):",
           "name": "AndyAppShell",
           "slots": [
             {
@@ -1665,6 +1841,149 @@
         },
         {
           "kind": "class",
+          "description": "`<andy-sidebar-brand>` — logo mark + wordmark for the sidebar `brand` slot.\r\n\r\nComposed from Andy-UI parts: an `<andy-icon-chip>` for the mark plus the\r\nname/tagline (hidden when the sidebar is collapsed).",
+          "name": "AndySidebarBrand",
+          "slots": [
+            {
+              "description": "Optional custom logo, used instead of `icon`.",
+              "name": "logo"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "tagline",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "tagline"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "IconName | \"\""
+              },
+              "default": "\"box\"",
+              "description": "Built-in icon name for the mark. Ignored when a `logo` is slotted.",
+              "attribute": "icon",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "name"
+            },
+            {
+              "name": "tagline",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "tagline"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "IconName | \"\""
+              },
+              "default": "\"box\"",
+              "description": "Built-in icon name for the mark. Ignored when a `logo` is slotted.",
+              "fieldName": "icon"
+            }
+          ],
+          "superclass": {
+            "name": "AndyElement",
+            "module": "/src/internal/base.js"
+          },
+          "tagName": "andy-sidebar-brand",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "`<andy-sidebar-user>` — user card for the sidebar `footer` slot.\r\n\r\nComposed from an `<andy-avatar>` plus name/email (hidden when collapsed).",
+          "name": "AndySidebarUser",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "email",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "email"
+            },
+            {
+              "kind": "field",
+              "name": "avatar",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Avatar initials (or slot an image into `<andy-avatar>` via the default slot).",
+              "attribute": "avatar"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "name"
+            },
+            {
+              "name": "email",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "email"
+            },
+            {
+              "name": "avatar",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Avatar initials (or slot an image into `<andy-avatar>` via the default slot).",
+              "fieldName": "avatar"
+            }
+          ],
+          "superclass": {
+            "name": "AndyElement",
+            "module": "/src/internal/base.js"
+          },
+          "tagName": "andy-sidebar-user",
+          "customElement": true
+        },
+        {
+          "kind": "class",
           "description": "`<andy-nav-section>` — titled group of nav items (`.nav-section`).",
           "name": "AndyNavSection",
           "slots": [
@@ -1722,6 +2041,28 @@
           },
           "tagName": "andy-header",
           "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "`<andy-footer>` — generic footer bar (`.au-footer`).\r\n\r\nA flexible slotted bar (content left, optional actions right). Works as a\r\npage/section footer and as the sidebar footer region.",
+          "name": "AndyFooter",
+          "slots": [
+            {
+              "description": "Main footer content (left).",
+              "name": ""
+            },
+            {
+              "description": "Right-aligned actions.",
+              "name": "actions"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "AndyElement",
+            "module": "/src/internal/base.js"
+          },
+          "tagName": "andy-footer",
+          "customElement": true
         }
       ],
       "exports": [
@@ -1759,6 +2100,38 @@
         },
         {
           "kind": "js",
+          "name": "AndySidebarBrand",
+          "declaration": {
+            "name": "AndySidebarBrand",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "andy-sidebar-brand",
+          "declaration": {
+            "name": "AndySidebarBrand",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AndySidebarUser",
+          "declaration": {
+            "name": "AndySidebarUser",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "andy-sidebar-user",
+          "declaration": {
+            "name": "AndySidebarUser",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "AndyNavSection",
           "declaration": {
             "name": "AndyNavSection",
@@ -1786,6 +2159,22 @@
           "name": "andy-header",
           "declaration": {
             "name": "AndyHeader",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AndyFooter",
+          "declaration": {
+            "name": "AndyFooter",
+            "module": "src/components/layout.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "andy-footer",
+          "declaration": {
+            "name": "AndyFooter",
             "module": "src/components/layout.ts"
           }
         }
@@ -2051,6 +2440,132 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/navbar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`<andy-navbar>` — top navigation bar (`.au-navbar`).\n\nA ready-made composition: a breadcrumb on the left, then a search box and a\ntheme toggle on the right. Child events bubble (`andy-navigate`,\n`andy-input`, `andy-theme-change`), so listen for them on the navbar.",
+          "name": "AndyNavbar",
+          "slots": [
+            {
+              "description": "Extra content placed before the theme toggle (buttons, avatar…).",
+              "name": "actions"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "AndyCrumb[]"
+              },
+              "default": "[]",
+              "description": "Breadcrumb trail (last item is the current leaf)."
+            },
+            {
+              "kind": "field",
+              "name": "searchPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Search…\"",
+              "attribute": "searchPlaceholder"
+            },
+            {
+              "kind": "field",
+              "name": "searchValue",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "searchValue"
+            },
+            {
+              "kind": "field",
+              "name": "noSearch",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the built-in search box.",
+              "attribute": "noSearch"
+            },
+            {
+              "kind": "field",
+              "name": "noThemeToggle",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the built-in theme toggle.",
+              "attribute": "noThemeToggle"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "searchPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Search…\"",
+              "fieldName": "searchPlaceholder"
+            },
+            {
+              "name": "searchValue",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "searchValue"
+            },
+            {
+              "name": "noSearch",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the built-in search box.",
+              "fieldName": "noSearch"
+            },
+            {
+              "name": "noThemeToggle",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the built-in theme toggle.",
+              "fieldName": "noThemeToggle"
+            }
+          ],
+          "superclass": {
+            "name": "AndyElement",
+            "module": "/src/internal/base.js"
+          },
+          "tagName": "andy-navbar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AndyNavbar",
+          "declaration": {
+            "name": "AndyNavbar",
+            "module": "src/components/navbar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "andy-navbar",
+          "declaration": {
+            "name": "AndyNavbar",
+            "module": "src/components/navbar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/progress.ts",
       "declarations": [
         {
@@ -2067,6 +2582,16 @@
               "default": "0",
               "description": "0–100.",
               "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Progress\"",
+              "description": "Accessible name for the progress bar.",
+              "attribute": "label"
             }
           ],
           "attributes": [
@@ -2078,6 +2603,15 @@
               "default": "0",
               "description": "0–100.",
               "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Progress\"",
+              "description": "Accessible name for the progress bar.",
+              "fieldName": "label"
             }
           ],
           "superclass": {
@@ -2195,7 +2729,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-select>` — styled native select (`.ds-select`).\n\nPass options via the `options` property, or project `<option>` children.",
+          "description": "`<andy-select>` — styled native select (`.ds-select`).\r\n\r\nPass options via the `options` property, or project `<option>` children.",
           "name": "AndySelect",
           "members": [
             {
@@ -2675,7 +3209,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`<andy-table>` — canonical data table (`.ds-table`).\n\nProvide `columns` and `rows`. For rich cells (pills, action buttons) you can\nalso use the `.ds-table` CSS classes directly — see the docs.",
+          "description": "`<andy-table>` — canonical data table (`.ds-table`).\r\n\r\nProvide `columns` and `rows`. For rich cells (pills, action buttons) you can\r\nalso use the `.ds-table` CSS classes directly — see the docs.",
           "name": "AndyTable",
           "members": [
             {
@@ -2878,7 +3412,7 @@
               }
             }
           ],
-          "description": "Imperatively show a toast. This is the primitive the React `useToast` hook\nand the Angular `ToastService` wrap."
+          "description": "Imperatively show a toast. This is the primitive the React `useToast` hook\r\nand the Angular `ToastService` wrap."
         },
         {
           "kind": "variable",
@@ -2918,7 +3452,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Base class for all Andy-UI elements.\n\nWe render into the **light DOM** (not a shadow root) on purpose: the whole\ndesign system is a global stylesheet (`@andy-ui/tokens`) built around global\n(often cross-component) class selectors and CSS custom properties driven by\n`[data-theme]` on <html>. Light-DOM rendering lets every component reuse that\nstylesheet verbatim and theme through the normal cascade — shadow DOM would\nscope those selectors away.\n\nLight DOM has no real `<slot>`, yet we still need to project author children\ninto our rendered chrome (e.g. a button label inside `<button class=\"btn\">`).\nWe do this **race-free across frameworks** as follows:\n\n  - Lit renders into a dedicated `display:contents` \"chrome wrapper\" that is a\n    child of the host (see createRenderRoot). Because Lit only ever\n    touches that wrapper, the host's *other* direct children — the author's\n    content — are never clobbered, whenever the framework inserts them.\n  - Author children are therefore trivially identifiable: every direct child\n    of the host except the wrapper. We relocate them into `display:contents`\n    \"slot target\" spans inside the chrome (see slotTarget), driven by\n    a MutationObserver so it works whether children arrive before or after the\n    element upgrades/connects (React inserts early; Angular inserts late).",
+          "description": "Base class for all Andy-UI elements.\r\n\r\nWe render into the **light DOM** (not a shadow root) on purpose: the whole\r\ndesign system is a global stylesheet (`@andy-ui/tokens`) built around global\r\n(often cross-component) class selectors and CSS custom properties driven by\r\n`[data-theme]` on <html>. Light-DOM rendering lets every component reuse that\r\nstylesheet verbatim and theme through the normal cascade — shadow DOM would\r\nscope those selectors away.\r\n\r\nLight DOM has no real `<slot>`, yet we still need to project author children\r\ninto our rendered chrome (e.g. a button label inside `<button class=\"btn\">`).\r\nWe do this **race-free across frameworks** as follows:\r\n\r\n  - Lit renders into a dedicated `display:contents` \"chrome wrapper\" that is a\r\n    child of the host (see createRenderRoot). Because Lit only ever\r\n    touches that wrapper, the host's *other* direct children — the author's\r\n    content — are never clobbered, whenever the framework inserts them.\r\n  - Author children are therefore trivially identifiable: every direct child\r\n    of the host except the wrapper. We relocate them into `display:contents`\r\n    \"slot target\" spans inside the chrome (see slotTarget), driven by\r\n    a MutationObserver so it works whether children arrive before or after the\r\n    element upgrades/connects (React inserts early; Angular inserts late).",
           "name": "AndyElement",
           "members": [],
           "superclass": {
@@ -2987,9 +3521,15 @@
           "kind": "variable",
           "name": "icons",
           "type": {
-            "text": "{\n  check: () => wrap(svg`<polyline points=\"20 6 9 17 4 12\"/>`),\n  info: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>`),\n  warning: () => wrap(svg`<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>`),\n  error: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/>`),\n  close: () => wrap(svg`<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>`),\n  eye: () => wrap(svg`<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>`),\n  copy: () => wrap(svg`<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/>`),\n  search: () => wrap(svg`<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>`),\n  sun: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>`),\n  moon: () => wrap(svg`<path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/>`),\n  chevron: () => wrap(svg`<polyline points=\"6 9 12 15 18 9\"/>`),\n}"
+            "text": "{\r\n  check: () => wrap(svg`<polyline points=\"20 6 9 17 4 12\"/>`),\r\n  info: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>`),\r\n  warning: () => wrap(svg`<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>`),\r\n  error: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/>`),\r\n  close: () => wrap(svg`<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>`),\r\n  eye: () => wrap(svg`<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>`),\r\n  copy: () => wrap(svg`<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/>`),\r\n  search: () => wrap(svg`<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>`),\r\n  sun: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>`),\r\n  moon: () => wrap(svg`<path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/>`),\r\n  chevron: () => wrap(svg`<polyline points=\"6 9 12 15 18 9\"/>`),\r\n  plus: () => wrap(svg`<line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/>`),\r\n  settings: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"/>`),\r\n  trash: () => wrap(svg`<polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2\"/>`),\r\n  grid: () => wrap(svg`<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/>`),\r\n  box: () => wrap(svg`<path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/>`),\r\n  key: () => wrap(svg`<path d=\"M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zM15.5 7.5l3 3L22 7l-3-3\"/>`),\r\n  link: () => wrap(svg`<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>`),\r\n  chevronsLeft: () => wrap(svg`<polyline points=\"11 17 6 12 11 7\"/><polyline points=\"18 17 13 12 18 7\"/>`),\r\n}"
           },
-          "default": "{ check: () => wrap(svg`<polyline points=\"20 6 9 17 4 12\"/>`), info: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>`), warning: () => wrap(svg`<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>`), error: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/>`), close: () => wrap(svg`<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>`), eye: () => wrap(svg`<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>`), copy: () => wrap(svg`<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/>`), search: () => wrap(svg`<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>`), sun: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>`), moon: () => wrap(svg`<path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/>`), chevron: () => wrap(svg`<polyline points=\"6 9 12 15 18 9\"/>`), }"
+          "default": "{ check: () => wrap(svg`<polyline points=\"20 6 9 17 4 12\"/>`), info: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>`), warning: () => wrap(svg`<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>`), error: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/>`), close: () => wrap(svg`<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>`), eye: () => wrap(svg`<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>`), copy: () => wrap(svg`<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/>`), search: () => wrap(svg`<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>`), sun: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>`), moon: () => wrap(svg`<path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/>`), chevron: () => wrap(svg`<polyline points=\"6 9 12 15 18 9\"/>`), plus: () => wrap(svg`<line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/>`), settings: () => wrap(svg`<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"/>`), trash: () => wrap(svg`<polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2\"/>`), grid: () => wrap(svg`<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/>`), box: () => wrap(svg`<path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/>`), key: () => wrap(svg`<path d=\"M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zM15.5 7.5l3 3L22 7l-3-3\"/>`), link: () => wrap(svg`<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>`), chevronsLeft: () => wrap(svg`<polyline points=\"11 17 6 12 11 7\"/><polyline points=\"18 17 13 12 18 7\"/>`), }"
+        },
+        {
+          "kind": "variable",
+          "name": "iconNames",
+          "default": "Object.keys(icons)",
+          "description": "Every icon name, handy for Storybook controls and iteration."
         }
       ],
       "exports": [
@@ -2998,6 +3538,14 @@
           "name": "icons",
           "declaration": {
             "name": "icons",
+            "module": "src/internal/icons.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "iconNames",
+          "declaration": {
+            "name": "iconNames",
             "module": "src/internal/icons.ts"
           }
         }

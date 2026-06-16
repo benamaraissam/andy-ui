@@ -1,7 +1,7 @@
 import { html as c } from "lit";
 import { property as p, customElement as f } from "lit/decorators.js";
 import { d as v, A as m } from "../chunks/base-DPbIYdLL.js";
-import { i as u } from "../chunks/icons-Dyl0601F.js";
+import { a as u } from "../chunks/icons-7oGzUTdG.js";
 var d = Object.defineProperty, h = Object.getOwnPropertyDescriptor, l = (i, t, n, e) => {
   for (var r = e > 1 ? void 0 : e ? h(t, n) : t, s = i.length - 1, a; s >= 0; s--)
     (a = i[s]) && (r = (e ? a(t, n, r) : a(r)) || r);

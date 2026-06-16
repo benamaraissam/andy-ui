@@ -1,63 +1,69 @@
-import { nothing as h, html as i } from "lit";
-import { property as s, customElement as d } from "lit/decorators.js";
-import { d as c, A as v } from "../chunks/base-DPbIYdLL.js";
-var y = Object.defineProperty, b = Object.getOwnPropertyDescriptor, t = (l, p, o, a) => {
-  for (var r = a > 1 ? void 0 : a ? b(p, o) : p, n = l.length - 1, u; n >= 0; n--)
-    (u = l[n]) && (r = (a ? u(p, o, r) : u(r)) || r);
-  return a && r && y(p, o, r), r;
+import { nothing as a, html as p } from "lit";
+import { property as i, customElement as u } from "lit/decorators.js";
+import { d as c, A as y } from "../chunks/base-DPbIYdLL.js";
+var b = Object.defineProperty, v = Object.getOwnPropertyDescriptor, t = (r, l, n, o) => {
+  for (var s = o > 1 ? void 0 : o ? v(l, n) : l, d = r.length - 1, h; d >= 0; d--)
+    (h = r[d]) && (s = (o ? h(l, n, s) : h(s)) || s);
+  return o && s && b(l, n, s), s;
 };
-let e = class extends v {
+let $ = 0, e = class extends y {
   constructor() {
-    super(...arguments), this.label = "", this.value = "", this.placeholder = "", this.type = "text", this.required = !1, this.disabled = !1, this.error = "";
+    super(...arguments), this._id = `andy-input-${++$}`, this.label = "", this.value = "", this.placeholder = "", this.type = "text", this.required = !1, this.disabled = !1, this.error = "";
   }
-  onInput(l) {
-    this.value = l.target.value, this.dispatchEvent(new CustomEvent("andy-input", { detail: this.value, bubbles: !0, composed: !0 }));
+  onInput(r) {
+    this.value = r.target.value, this.dispatchEvent(new CustomEvent("andy-input", { detail: this.value, bubbles: !0, composed: !0 }));
   }
   onChange() {
     this.dispatchEvent(new CustomEvent("andy-change", { detail: this.value, bubbles: !0, composed: !0 }));
   }
   render() {
-    return i`
+    const r = `${this._id}-error`;
+    return p`
       <div class="dp-field">
-        ${this.label ? i`<label class="label">${this.label}${this.required ? i` <span class="req">*</span>` : h}</label>` : h}
+        ${this.label ? p`<label class="label" for=${this._id}
+              >${this.label}${this.required ? p` <span class="req" aria-hidden="true">*</span>` : a}</label
+            >` : a}
         <input
+          id=${this._id}
           class="dp-input ${this.error ? "is-error" : ""}"
           type=${this.type}
           .value=${this.value}
           placeholder=${this.placeholder}
           ?required=${this.required}
           ?disabled=${this.disabled}
+          aria-invalid=${this.error ? "true" : a}
+          aria-describedby=${this.error ? r : a}
           @input=${this.onInput}
           @change=${this.onChange}
         />
-        ${this.error ? i`<span class="error-msg">${this.error}</span>` : h}
+        ${this.error ? p`<span class="error-msg" id=${r} role="alert">${this.error}</span>` : a}
       </div>
     `;
   }
 };
 t([
-  s()
+  i()
 ], e.prototype, "label", 2);
 t([
-  s()
+  i()
 ], e.prototype, "value", 2);
 t([
-  s()
+  i()
 ], e.prototype, "placeholder", 2);
 t([
-  s()
+  i()
 ], e.prototype, "type", 2);
 t([
-  s({ type: Boolean, reflect: !0 })
+  i({ type: Boolean, reflect: !0 })
 ], e.prototype, "required", 2);
 t([
-  s({ type: Boolean, reflect: !0 })
+  i({ type: Boolean, reflect: !0 })
 ], e.prototype, "disabled", 2);
 t([
-  s()
+  i()
 ], e.prototype, "error", 2);
 e = t([
-  d("andy-input")
+  u("andy-input")
 ], e);
 c("andy-input", e);
 export {

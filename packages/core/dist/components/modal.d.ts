@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { nothing, type PropertyValues } from "lit";
 import { AndyElement } from "../internal/base.js";
 /**
  * `<andy-modal>` — dialog with overlay (`.modal-overlay` / `.modal-content`).
@@ -12,12 +12,18 @@ export declare class AndyModal extends AndyElement {
     heading: string;
     /** Disable closing on backdrop click / Escape. */
     persistent: boolean;
+    private readonly _titleId;
+    /** Element focused before the dialog opened, restored on close. */
+    private _returnFocus;
     connectedCallback(): void;
     disconnectedCallback(): void;
     private _onKey;
+    /** Keep Tab focus cycling inside the dialog. */
+    private _trapTab;
+    protected updated(changed: PropertyValues): void;
     close(): void;
     private onBackdrop;
-    render(): import("lit").TemplateResult<1> | typeof nothing;
+    render(): typeof nothing | import("lit").TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {

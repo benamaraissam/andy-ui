@@ -38,6 +38,7 @@ import {
   AndySidebarUser,
   AndyNavSection,
   AndyHeader,
+  AndyFooter,
   AndyModal,
   AndyTabs,
   AndyAccordion,
@@ -145,6 +146,7 @@ export const Navbar = createComponent({
   },
 });
 export const Header = createComponent({ react: React, tagName: "andy-header", elementClass: AndyHeader });
+export const Footer = createComponent({ react: React, tagName: "andy-footer", elementClass: AndyFooter });
 
 export const Modal = createComponent({
   react: React,
