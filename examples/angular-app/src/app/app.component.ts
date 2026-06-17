@@ -20,16 +20,7 @@ type Screen = "agents" | "skills" | "adapters" | "keys";
   template: `
     <andy-app-shell>
       <andy-sidebar slot="sidebar">
-        <span slot="brand" class="sidebar-brand__mark">
-          <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
-            <path d="M12 3 3.5 7.2 12 11.4l8.5-4.2L12 3Z" fill="currentColor" opacity=".95" />
-            <path d="M3.5 12 12 16.2 20.5 12" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" opacity=".75" />
-          </svg>
-        </span>
-        <span slot="brand" class="sidebar-brand__text collapsed-hide">
-          <span class="sidebar-brand__name">Andy-UI</span>
-          <span class="sidebar-brand__tagline">Angular</span>
-        </span>
+        <andy-header slot="brand" name="Andy-UI" tagline="Angular" icon="box"></andy-header>
 
         @for (group of sections; track group) {
           <andy-nav-section [heading]="group">
@@ -42,23 +33,12 @@ type Screen = "agents" | "skills" | "adapters" | "keys";
           </andy-nav-section>
         }
 
-        <div slot="footer" class="sidebar-user">
-          <span class="sidebar-user__avatar">AY</span>
-          <span class="sidebar-user__meta collapsed-hide">
-            <span class="sidebar-user__name">Andy</span>
-            <span class="sidebar-user__email">andy&#64;andy-ui.dev</span>
-          </span>
-        </div>
+        <andy-footer slot="footer" name="Andy" email="andy&#64;andy-ui.dev" avatar="AY"></andy-footer>
       </andy-sidebar>
 
-      <andy-header slot="header">
-        <andy-breadcrumb [items]="crumbs()"></andy-breadcrumb>
-        <!-- crumbs() is a computed signal: a stable array reference per screen,
-             so binding it to the element does NOT reschedule Lit updates every
-             change-detection pass (which would loop). -->
-
-        <andy-theme-toggle slot="actions"></andy-theme-toggle>
-      </andy-header>
+      <!-- crumbs() is a computed signal: a stable array reference per screen, so
+           binding it does NOT reschedule Lit updates every change-detection pass. -->
+      <andy-navbar slot="header" [items]="crumbs()" searchPlaceholder="Search…"></andy-navbar>
 
       <!-- AGENTS -->
       <section [hidden]="screen() !== 'agents'">

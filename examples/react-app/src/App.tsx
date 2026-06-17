@@ -4,9 +4,9 @@ import {
   Sidebar,
   NavSection,
   NavItem,
+  Navbar,
   Header,
-  Breadcrumb,
-  ThemeToggle,
+  Footer,
   Button,
   Card,
   SkillCard,
@@ -20,7 +20,7 @@ import {
   SearchInput,
   toast,
 } from "@andy-ui/react";
-import { AgentsIcon, SkillsIcon, AdaptersIcon, KeysIcon, PlusIcon, LogoMark } from "./icons";
+import { AgentsIcon, SkillsIcon, AdaptersIcon, KeysIcon, PlusIcon } from "./icons";
 
 type Screen = "agents" | "skills" | "adapters" | "keys";
 type IconCmp = (p: { className?: string }) => JSX.Element;
@@ -45,13 +45,7 @@ export function App() {
   return (
     <AppShell>
       <Sidebar slot="sidebar">
-        <span slot="brand" className="sidebar-brand__mark">
-          <LogoMark className="logo-icon" />
-        </span>
-        <span slot="brand" className="sidebar-brand__text collapsed-hide">
-          <span className="sidebar-brand__name">Andy-UI</span>
-          <span className="sidebar-brand__tagline">React</span>
-        </span>
+        <Header slot="brand" name="Andy-UI" tagline="React" icon="box" />
 
         {sections.map((section) => (
           <NavSection key={section} heading={section}>
@@ -66,19 +60,14 @@ export function App() {
           </NavSection>
         ))}
 
-        <div slot="footer" className="sidebar-user">
-          <span className="sidebar-user__avatar">AY</span>
-          <span className="sidebar-user__meta collapsed-hide">
-            <span className="sidebar-user__name">Andy</span>
-            <span className="sidebar-user__email">andy@andy-ui.dev</span>
-          </span>
-        </div>
+        <Footer slot="footer" name="Andy" email="andy@andy-ui.dev" avatar="AY" />
       </Sidebar>
 
-      <Header slot="header">
-        <Breadcrumb items={[{ label: "workspace", href: "#" }, { label: screen === "keys" ? "api-keys" : screen }]} />
-        <ThemeToggle slot="actions" />
-      </Header>
+      <Navbar
+        slot="header"
+        items={[{ label: "workspace", href: "#" }, { label: screen === "keys" ? "api-keys" : screen }]}
+        searchPlaceholder="Search…"
+      />
 
       <ScreenShell screen="agents" active={screen} title="AI Agents" copy="Manage intelligent agents and automate your tasks." Icon={AgentsIcon} cta="New agent">
         <AgentsScreen />
