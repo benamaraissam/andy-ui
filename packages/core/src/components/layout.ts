@@ -7,7 +7,7 @@ import { AndyElement, define } from "../internal/base.js";
  *
  * Regions (light-DOM slots):
  * @slot sidebar - The `<andy-sidebar>`.
- * @slot header  - The `<andy-header>` (sticky, top of the main column).
+ * @slot header  - The `<andy-header>` / `<andy-navbar>` (top of the main column).
  * @slot         - The scrolling page content.
  *
  * Listens for `andy-collapse-toggle` from a descendant sidebar and mirrors the
@@ -43,48 +43,6 @@ export class AndyAppShell extends AndyElement {
 define("andy-app-shell", AndyAppShell);
 
 /**
- * `<andy-sidebar>` — collapsible workspace sidebar (`.sidebar`).
- *
- * @slot brand  - Brand mark / wordmark (shown in the sidebar header).
- * @slot        - Nav sections (`<andy-nav-section>` / `<andy-nav-list>`).
- * @slot footer - Footer content (user card, sign-out, …).
- * @fires {CustomEvent<boolean>} andy-collapse-toggle - new collapsed state.
- */
-@customElement("andy-sidebar")
-export class AndySidebar extends AndyElement {
-  @property({ type: Boolean, reflect: true }) collapsed = false;
-  /** Show the collapse toggle button in the header. */
-  @property({ type: Boolean }) collapsible = true;
-
-  private toggle() {
-    this.collapsed = !this.collapsed;
-    this.dispatchEvent(
-      new CustomEvent("andy-collapse-toggle", { detail: this.collapsed, bubbles: true, composed: true })
-    );
-  }
-
-  override render() {
-    return html`
-      <aside class="sidebar ${this.collapsed ? "collapsed" : ""}">
-        <div class="sidebar-header">
-          <div class="sidebar-header__top">
-            <div class="sidebar-brand">${this.slotTarget("brand")}</div>
-            ${this.collapsible
-              ? html`<button class="sidebar-collapse-toggle" title="Collapse" aria-label="Collapse sidebar" @click=${this.toggle}>
-                  <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19l-7-7 7-7M19 19l-7-7 7-7" /></svg>
-                </button>`
-              : nothing}
-          </div>
-        </div>
-        <nav class="sidebar-nav">${this.slotTarget()}</nav>
-        ${this.hasSlot("footer") ? html`<div class="sidebar-footer">${this.slotTarget("footer")}</div>` : nothing}
-      </aside>
-    `;
-  }
-}
-define("andy-sidebar", AndySidebar);
-
-/**
  * `<andy-nav-section>` — titled group of nav items (`.nav-section`).
  * @slot - `<andy-nav-item>` rows (wrapped in a `.nav-list`).
  */
@@ -103,31 +61,9 @@ export class AndyNavSection extends AndyElement {
 }
 define("andy-nav-section", AndyNavSection);
 
-/**
- * `<andy-header>` — sticky app header / topbar (`.header`).
- * @slot         - Title / breadcrumb area (left).
- * @slot actions - Right-aligned actions.
- */
-@customElement("andy-header")
-export class AndyHeader extends AndyElement {
-  override render() {
-    return html`
-      <header class="header">
-        <div class="header-content">
-          <div class="header-title">${this.slotTarget()}</div>
-          <div class="header-actions">${this.slotTarget("actions")}</div>
-        </div>
-      </header>
-    `;
-  }
-}
-define("andy-header", AndyHeader);
-
 declare global {
   interface HTMLElementTagNameMap {
     "andy-app-shell": AndyAppShell;
-    "andy-sidebar": AndySidebar;
     "andy-nav-section": AndyNavSection;
-    "andy-header": AndyHeader;
   }
 }

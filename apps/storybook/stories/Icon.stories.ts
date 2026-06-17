@@ -17,10 +17,16 @@ const meta: Meta = {
   argTypes: {
     name: { control: "select", options: iconNames, description: "Icon from the built-in set.", table: { category: "Props" } },
     size: { control: "inline-radio", options: ["sm", "md", "lg", "xl"], table: { category: "Props", defaultValue: { summary: "md" } } },
+    tone: {
+      control: "select",
+      options: ["inherit", "brand", "success", "warning", "error", "info", "muted"],
+      description: "Semantic colour (design tokens). `inherit` = currentColor.",
+      table: { category: "Props", defaultValue: { summary: "inherit" } },
+    },
     label: { control: "text", description: "Accessible label; empty = decorative (aria-hidden).", table: { category: "Props" } },
   },
-  args: { name: "search", size: "lg", label: "" },
-  render: (a) => html`<andy-icon name=${a.name} size=${a.size} label=${a.label}></andy-icon>`,
+  args: { name: "search", size: "lg", tone: "inherit", label: "" },
+  render: (a) => html`<andy-icon name=${a.name} size=${a.size} tone=${a.tone} label=${a.label}></andy-icon>`,
 };
 export default meta;
 type Story = StoryObj;
@@ -49,6 +55,20 @@ export const Sizes: Story = {
       <andy-icon name="settings" size="md"></andy-icon>
       <andy-icon name="settings" size="lg"></andy-icon>
       <andy-icon name="settings" size="xl"></andy-icon>
+    </div>
+  `,
+};
+
+export const Tones: Story = {
+  parameters: { docs: { description: { story: "Semantic colour tones — design tokens only (`inherit` follows currentColor)." } } },
+  render: () => html`
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+      ${["inherit", "brand", "success", "warning", "error", "info", "muted"].map(
+        (t) => html`<div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:72px">
+          <andy-icon name="info" size="lg" tone=${t}></andy-icon>
+          <span class="t-meta">${t}</span>
+        </div>`
+      )}
     </div>
   `,
 };

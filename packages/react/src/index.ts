@@ -31,10 +31,12 @@ import {
   AndyBreadcrumb,
   AndyNavList,
   AndyNavItem,
+  AndyNavbar,
   AndyAppShell,
   AndySidebar,
   AndyNavSection,
   AndyHeader,
+  AndyFooter,
   AndyModal,
   AndyTabs,
   AndyAccordion,
@@ -129,7 +131,18 @@ export const Sidebar = createComponent({
   events: { onAndyCollapseToggle: "andy-collapse-toggle" as EventName<CustomEvent<boolean>> },
 });
 export const NavSection = createComponent({ react: React, tagName: "andy-nav-section", elementClass: AndyNavSection });
+export const Navbar = createComponent({
+  react: React,
+  tagName: "andy-navbar",
+  elementClass: AndyNavbar,
+  events: {
+    onAndyNavigate: "andy-navigate" as EventName<CustomEvent<AndyCrumb>>,
+    onAndyInput: "andy-input" as EventName<CustomEvent<string>>,
+    onAndyThemeChange: "andy-theme-change" as EventName<CustomEvent<AndyTheme>>,
+  },
+});
 export const Header = createComponent({ react: React, tagName: "andy-header", elementClass: AndyHeader });
+export const Footer = createComponent({ react: React, tagName: "andy-footer", elementClass: AndyFooter });
 
 export const Modal = createComponent({
   react: React,
